@@ -51,12 +51,54 @@ controls! The current code has a few bugs that prevent it from being used. Still
 waiting for them to accept my pull requests to fix this.
 
 
-### data flow diagrams
+### data flow
 
- TODO: figure here
+This 
 
-### dependencies
- 
- TODO: figure here
+```
+     Node Data Flows
++-----------------------------------------------------------------+
+
+  any of these modules             might .pipe() into any of these
+                             +
+                +-----+      |
+                | mic |      |      +----------------+
+                +-----+      |      | audio|analyser |
+                             |      +----------------+
+                             |
+    +-----------------+      |      +--------------+
+    | node|microphone |   +----->   | audio|render |
+    +-----------------+      |      +--------------+
+                             |
+                             |      +----------------+
++---------------------+      |      | audio|waveform |
+| audio|record|lpcm16 |      |      +----------------+
++---------------------+      |
+                             |      +----------------+
+                             |      | node|whistlerr |
+                             |      +----------------+
+                             +
+
+
+
+    Browser Data Flows
+  +--------------------------------------------------------------+
+
+   any of these modules           might .pipe() into any of these
+                             +
+  +-------------------+      |      +-----------+
+  | microphone|stream |      |      | whistlerr |
+  +-------------------+      |      +-----------+
+                             |
+                             |      +--------------+
+      +---------------+   +----->   | audio|render |
+      | wave|recorder |      |      +--------------+
+      +---------------+      |
+                             |      +---------------+
+                             |      | audo|waveform |
+                             |      +---------------+
+                             +
+
+```
 
 
