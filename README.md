@@ -1,6 +1,6 @@
 ## npm-audio-modules
 
-my personal notes on the minefield that is audio modules in npm/javascript.
+Personal notes on various audio modules in npm/javascript.
 
 
 ### node microphone modules
@@ -23,16 +23,19 @@ as `microphone-stream`
 
 ### processing modules
 
-The web Audio API is not available natively in node. There's a lot of javascript out in
+The web Audio API (specifically the `analyser` object) is not available in node. There's a lot of javascript out in
 the wild based on this API, which would be really nice to be able to use in node.
 
 `audio-analyser` is an awesome module that bridges this gap. It provides a writable node 
-stream. You pipe microphone data in, and then can access the web audio API.
+stream. You pipe microphone data in, and then can access the web audio API analyser functions.
 
 https://github.com/shubhamjain/whistlerr is not an npm module, but it provides a way
 to take an audio input from the browser and detect when whistles occur.
 
 my fork, which exposes a node module for this: https://github.com/mreinstein/node-whistlerr
+
+I have a PR which makes shubhamjain's module cross platform, waiting for him to merge it so
+that I can remove my copy.
 
 
 ### rendering modules
@@ -47,8 +50,7 @@ It's a little hard to use because the examples aren't helpful, but I'm hoping th
 my PR which provides node and browser usage examples.
 
 `wavearea` provides a waveform renderer, but it also provides simple cut/copy/paste edit
-controls! The current code has a few bugs that prevent it from being used. Still 
-waiting for them to accept my pull requests to fix this.
+controls!
 
 
 ### data flow
@@ -63,19 +65,19 @@ This
                              +
                 +-----+      |
                 | mic |      |      +----------------+
-                +-----+      |      | audio|analyser |
+                +-----+      |      | audio-analyser |
                              |      +----------------+
                              |
     +-----------------+      |      +--------------+
-    | node|microphone |   +----->   | audio|render |
+    | node-microphone |   +----->   | audio-render |
     +-----------------+      |      +--------------+
                              |
                              |      +----------------+
-+---------------------+      |      | audio|waveform |
-| audio|record|lpcm16 |      |      +----------------+
++---------------------+      |      | audio-waveform |
+| audio-record-lpcm16 |      |      +----------------+
 +---------------------+      |
                              |      +----------------+
-                             |      | node|whistlerr |
+                             |      | node-whistlerr |
                              |      +----------------+
                              +
 
@@ -87,15 +89,15 @@ This
    any of these modules           might .pipe() into any of these
                              +
   +-------------------+      |      +-----------+
-  | microphone|stream |      |      | whistlerr |
+  | microphone-stream |      |      | whistlerr |
   +-------------------+      |      +-----------+
                              |
                              |      +--------------+
-      +---------------+   +----->   | audio|render |
-      | wave|recorder |      |      +--------------+
+      +---------------+   +----->   | audio-render |
+      | wave-recorder |      |      +--------------+
       +---------------+      |
                              |      +---------------+
-                             |      | audo|waveform |
+                             |      | audo-waveform |
                              |      +---------------+
                              +
 
