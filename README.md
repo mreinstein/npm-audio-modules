@@ -29,13 +29,8 @@ the wild based on this API, which would be really nice to be able to use in node
 `audio-analyser` is an awesome module that bridges this gap. It provides a writable node 
 stream. You pipe microphone data in, and then can access the web audio API analyser functions.
 
-https://github.com/shubhamjain/whistlerr is not an npm module, but it provides a way
-to take an audio input from the browser and detect when whistles occur.
+`whistlerr` iprovides a way to take an audio input from the browser and detect when whistles occur.
 
-my fork, which exposes a node module for this: https://github.com/mreinstein/node-whistlerr
-
-I have a PR which makes shubhamjain's module cross platform, waiting for him to merge it so
-that I can remove my copy.
 
 
 ### rendering modules
@@ -77,7 +72,7 @@ This
 | audio-record-lpcm16 |      |      +----------------+
 +---------------------+      |
                              |      +----------------+
-                             |      | node-whistlerr |
+                             |      | whistlerr      |
                              |      +----------------+
                              +
 
