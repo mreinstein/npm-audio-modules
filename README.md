@@ -21,6 +21,16 @@ pretty huge because shimming node modules for the front end results in a big siz
 as `microphone-stream`
 
 
+### browser streaming audio player
+
+This is the only working module I've seen that is able to stream audio data over a websocket and play in the browser: 
+
+https://github.com/scottstensland/websockets-streaming-audio
+
+Unfortunately the code for this is quite hairy. This might be a good fallback.
+
+
+
 ### processing modules
 
 The web Audio API (specifically the `analyser` object) is not available in node. There's a lot of javascript out in
@@ -43,9 +53,10 @@ It uses node-style streams, so to use this in the browser you need something lik
 It's a little hard to use because the examples aren't helpful, but I'm hoping they accept 
 my PR which provides node and browser usage examples:  https://github.com/audio-lab/waveform/pull/1
 
-
 `wavearea` provides a waveform renderer, but it also provides simple cut/copy/paste edit
 controls!
+
+`visualizer.js` works only in the browser, but provides some nice looking canvas based audio visualizations
 
 
 ### data flow diagrams
